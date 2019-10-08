@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
     private float _speed = 3.5f;
     [SerializeField]
     private GameObject _laserPrefab;
+    [SerializeField]
+    private float _fireRate = 0.5f;
+    private float _nextFire = -0.5f;
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
@@ -15,14 +18,13 @@ public class Player : MonoBehaviour
     void Update()
     {
         calculateMovement();
-        laserSpawn();
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire)
+            laserSpawn();
                 }
     void laserSpawn()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
+            _nextFire = Time.time + _fireRate;
             Instantiate(_laserPrefab, transform.position + new Vector3(0,0.7f,0), Quaternion.identity);
-        }
 
     }
     void calculateMovement()
@@ -32,15 +34,7 @@ public class Player : MonoBehaviour
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
         transform.Translate(direction * _speed * Time.deltaTime);
 
-       /* if (transform.position.y >= 0)
-        {
-            transform.position = new Vector3(transform.position.x, 0, 0);
-        }
-        else if (transform.position.y <= -3.8)
-        {
-            transform.position = new Vector3(transform.position.x, -3.8f, 0);
-        } TO JEST TO SAMO CO: */
-        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0));   // TO XD
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0));
 
         if (transform.position.x >= 9.23)
         {
