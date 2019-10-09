@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     private float _nextFire = -0.5f;
     void Start()
     {
-        transform.position = new Vector3(0, 0, 0);
+        setStartingPos();
     }
     void Update()
     {
@@ -21,6 +21,10 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire)
             laserSpawn();
                 }
+    void setStartingPos()
+    {
+        transform.position = new Vector3(0, 0, 0);
+    }
     void laserSpawn()
     {
             _nextFire = Time.time + _fireRate;
