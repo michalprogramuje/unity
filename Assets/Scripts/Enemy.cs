@@ -19,7 +19,8 @@ public class Enemy : MonoBehaviour
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
         if (transform.position.y < -4.15)
         {
-            transform.position = new Vector3(Random.value*18.97f-9.45f, 6.2f, 0); //pole gry jest między -9.45 a +9.52 (x)
+            float randomNumber = Random.Range(-9.45f, 9.52f);
+            transform.position = new Vector3(randomNumber, 6.2f, 0);
         }
     }
 }
