@@ -14,13 +14,21 @@ public class Enemy : MonoBehaviour
     {
         calculateMovement();
     }
+    void OnTriggerEnter(Collider other)
+    {
+        spawnAtRandom();
+    }
     void calculateMovement()
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
         if (transform.position.y < -4.15)
         {
-            float randomNumber = Random.Range(-9.45f, 9.52f);
-            transform.position = new Vector3(randomNumber, 6.2f, 0);
+            spawnAtRandom();
         }
+    }
+    void spawnAtRandom()
+    {
+        float randomNumber = Random.Range(-9.45f, 9.52f);
+        transform.position = new Vector3(randomNumber, 6.2f, 0);
     }
 }
